@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2017/03/28 14:42:54.000.904,=C:\Users\tony\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/03/30 10:59:41.000.142,=C:\Users\tony\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/03/30 11:00:17.000.567,F:\Delphi\XE10\D_CommTest\Unit1.dfm=C:\Users\tony\Documents\Embarcadero\Studio\Projects\Unit1.dfm</Transaction>
+    <Transaction>2017/03/30 11:00:17.000.567,F:\Delphi\XE10\D_CommTest\Unit1.pas=C:\Users\tony\Documents\Embarcadero\Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2017/03/30 11:00:19.000.096,F:\Delphi\XE10\D_CommTest\Project1.dproj=C:\Users\tony\Documents\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2017/03/30 11:01:22.000.747,=F:\Delphi\XE10\D_CommTest\uCiaComport.pas</Transaction>
+  </Transactions>
+</BorlandProject>
