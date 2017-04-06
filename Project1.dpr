@@ -3,7 +3,8 @@ program Project1;
 uses
   Vcl.Forms,
   Unit1 in 'Unit1.pas' {Form1},
-  uCiaComport in 'uCiaComport.pas';
+  uCiaComport in 'uCiaComport.pas',
+  uCommProc in 'uCommProc.pas';
 
 {$R *.res}
 
