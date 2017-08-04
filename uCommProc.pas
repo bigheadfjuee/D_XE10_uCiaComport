@@ -51,7 +51,7 @@ begin
 
   Comm := TCiaComPort.Create(self);
   Comm.Port := 1;
-  Comm.Baudrate := 9200;
+  Comm.Baudrate := 9600;
   Comm.ByteSize := 8;
   Comm.Parity := ptNone;
   Comm.StopBits := sbOne;
@@ -93,9 +93,9 @@ end;
 
 procedure TCommProc.PortDataAvailable(Sender: TObject);
 var
-  i, count, tail, head: Integer;
-  P: PByte;
-  str: String;
+  count, tail, head: Integer;
+//  P: PByte;
+//  str: String;
 begin
   count := Comm.RxCount;
 
