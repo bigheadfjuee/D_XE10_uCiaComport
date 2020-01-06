@@ -1,9 +1,9 @@
-unit uCommProc;
+ï»¿unit uCommProc;
 
 {
   Tony :
-  ¨Ï¥Î readBuffer ·í§@ Queue ¥h¼È¦s Comm.Receive ¦¬¨ìªº Byte
-  ¨Ï¥Î TThreadProc ¥h¸ÑªR ©T©wªø«×(8) ªº«ü¥O
+  ä½¿ç”¨ readBuffer ç•¶ä½œ Queue å»æš«å­˜ Comm.Receive æ”¶åˆ°çš„ Byte
+  ä½¿ç”¨ TThreadProc å»è§£æ å›ºå®šé•·åº¦(8) çš„æŒ‡ä»¤
 }
 interface
 
@@ -70,36 +70,51 @@ end;
 
 procedure TCommProc.Send;
 var
-  arr: array [1 .. 8] of Byte;
-  lrc: Byte;
+  arr: array [1 .. 13] of Byte;
+  str : string;
+  ck: Byte;
   i: Integer;
 begin
-  arr[1] := $01;
-  arr[2] := $02;
-  arr[3] := $03;
-  arr[4] := $04;
-  arr[5] := $05;
-  arr[6] := $06;
-  arr[7] := $07;
+  arr[1] := $A5;
+  arr[2] := $AC;
+  arr[3] := $0D; // Byte3
+  arr[4] := $00;
+  arr[5] := $01; // cmd
+  arr[6] := $01; // p1
+  arr[7] := $00; // p2
+  arr[8] := $00;
+  arr[9] := $00;
+  arr[10] := $0; // ch
+  arr[11] := $0; // ch
 
-  lrc := $00;
-  for i := 1 to 7 do
-    lrc := lrc xor arr[i];
+  str := 'A5 AC ';
 
-  arr[8] := lrc;
+  ck := $00;
+  for i := 3 to 11 do
+  begin
+    ck := ck + arr[i];
+    str := str + IntToHex(arr[i],2) + ' ';
+  end;
 
-  Comm.Send(@arr[1], 8);
+  arr[12] := ck;
+  Comm.Send(@arr, 12);
+
+  str := str + IntToHex(ck,2);
+  Memo.Lines.Add(str);
+
+  // Comm.SendStr('test1234');
 end;
 
 procedure TCommProc.PortDataAvailable(Sender: TObject);
 var
   count, tail, head: Integer;
-//  P: PByte;
-//  str: String;
+  P: PByte;
+  str: String;
 begin
   count := Comm.RxCount;
 
   try
+
     if readIndex + count <= BUFF_SIZE then
     begin
       Comm.Receive(@readBuffer[readIndex], count);
@@ -113,8 +128,10 @@ begin
 
       Comm.Receive(@readBuffer[1], head);
       readIndex := head + 1;
+
     end;
 
+    // Memo.Lines.Add(Comm.ReceiveStr);
   finally
 
   end;
@@ -126,6 +143,7 @@ var
   len, i, index: Integer;
   str: String;
 begin
+
   len := readIndex - procIndex;
 
   if len = 0 then
@@ -153,6 +171,7 @@ begin
 
   if Assigned(Memo) then
     Memo.Lines.Add(str);
+
 end;
 
 procedure TThreadProc.Execute;
